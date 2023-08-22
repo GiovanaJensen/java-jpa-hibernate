@@ -3,10 +3,10 @@ package br.com.alura.testes;
 import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
+import br.com.alura.dao.ProdutoDao;
 import br.com.alura.modelo.Produto;
+import br.com.alura.util.JPAUtil;
 
 public class CadastroProdutos {
 
@@ -16,10 +16,12 @@ public class CadastroProdutos {
         celular.setDescricao("muito legal");
         celular.setPreco(new BigDecimal("800"));
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("loja");
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();
+
+        ProdutoDao dao = new ProdutoDao(em);
+
         em.getTransaction().begin();
-        em.persist(celular);
+        dao.cadastrar(celular);
         em.getTransaction().commit();
         em.close();
     }
