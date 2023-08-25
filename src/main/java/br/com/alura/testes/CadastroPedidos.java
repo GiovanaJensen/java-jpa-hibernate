@@ -1,9 +1,11 @@
 package br.com.alura.testes;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.alura.Vo.RelatorioDeVendasVo;
 import br.com.alura.dao.CategoriaDao;
 import br.com.alura.dao.ClienteDao;
 import br.com.alura.dao.PedidoDao;
@@ -39,6 +41,9 @@ public class CadastroPedidos {
 
         BigDecimal valorTotal = pedidoDao.valorTotal();
         System.out.println("VALOR TOTAL: " + valorTotal);
+
+        List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
+        relatorio.forEach(System.out::println);
     }
 
      public static void popularBancoDeDados(){
